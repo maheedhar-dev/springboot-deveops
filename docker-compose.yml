@@ -5,21 +5,28 @@ services:
     image: mysql:8
     container_name: mysql-dev
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: testdb
-      MYSQL_USER: testuser
-      MYSQL_PASSWORD: testpass
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3307:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
   app:
     image: maheedhar429/springboot-deveops:latest
-    container_name: springboot-devops-app
+    container_name: springboot-app
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/testdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: testuser
-      SPRING_DATASOURCE_PASSWORD: testpass
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: ${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
