@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: devops
+  datasource:
+    url: jdbc:mysql://localhost:3306/worlddb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  security:
+    user:
+      name: maheedhar
+      password: password
+server:
+  port: 8080
+  servlet:
+    context-path: /world
