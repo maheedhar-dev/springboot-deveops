@@ -10,7 +10,7 @@ services:
       MYSQL_USER: testuser
       MYSQL_PASSWORD: testpass
     ports:
-      - "3306:3306"
+      - "3307:3306"
 
   app:
     image: maheedhar429/springboot-deveops:latest
