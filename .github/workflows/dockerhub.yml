@@ -51,7 +51,7 @@ jobs:
       # 4️⃣ Set environment variables for MySQL
       - name: Set DB environment variables
         run: |
-          echo "SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/testdb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_USERNAME=testuser" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_PASSWORD=testpass" >> $GITHUB_ENV
 
